@@ -29,12 +29,18 @@ We assume the existence of a file `test-input` on the user directory on HDFS of 
 
 All the write jobs create the table if it does not exist already - **WriteBulk** also takes care of computing splits appropriate for the file contents and a desired region size (128M in the example).
 
-**Read** read the contents of `test-tables` and reassambles a TSV output on HDFS under `test-output`, in the same format as the original.
+**Read** read the contents of `test-tables` and reassambles a TSV output on HDFS under `test-output`, in the same format as the original. It does this by specifying both the column families and the columns to read, as a `Map[String, Set[String]]`.
+
+**ReadCf** does the same as **Read** but only specifies the column families, as a `Set[String]`. The whole column families are read - this is useful in the cases where the set of columns in a family is not known a priori, e.g. when the column families are used as a set (using a dummy marker value for all columns).
+
+In all jobs we are using `String` values for the cells, but HBaseRDD is not limited to this. Any other type `A` is supported, provided there is an implicit `Reads[A]` or `Writes[A]` in scope. These are traits defined by HBaseRDD that essentially wrap conversions from `Array[Byte]` to `A` and viceversa.
+
+By default, HBaseRDD ships converters for `Array[Byte]` (duh!), `String` and `JValue` from [Json4s](http://json4s.org/), but you can write your own implicit conversions as necessary.
 
 Test file
 ---------
 
-You can generate the test file as you prefer. A quick way would be opening a Scala console and writing
+You can generate the test file as you prefer. A quick way would be to open a Scala console and write
 
     import java.io._
     import scala.util.Random
