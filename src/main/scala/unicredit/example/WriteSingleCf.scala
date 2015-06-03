@@ -32,5 +32,5 @@ object WriteSingleCf extends App {
 
       k -> content
     })
-    .tohbase("test-table", "cf1")
+    .toHBase("test-table", "cf1")
 }

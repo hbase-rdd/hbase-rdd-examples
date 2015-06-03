@@ -17,7 +17,6 @@ package unicredit.example
 import org.apache.spark.{ SparkContext, SparkConf }
 import unicredit.spark.hbase._
 
-
 object WriteBulk extends App {
   val name = "Example of write using HFiles"
 
@@ -28,7 +27,7 @@ object WriteBulk extends App {
   val file = "test-input"
   val cf = "cf1"
 
-  if (prepareTable(table, cf, file, "1G", null, takeSnapshot = false)) {
+  if (tableExists(table, cf)) {
     sc.textFile(file)
       .map({ line =>
         val Array(k, col1, col2, _) = line split "\t"
@@ -36,6 +35,6 @@ object WriteBulk extends App {
 
         k -> content
       })
-      .loadToHBase(table, "cf1")
+      .toHBaseBulk(table, cf)
   }
 }

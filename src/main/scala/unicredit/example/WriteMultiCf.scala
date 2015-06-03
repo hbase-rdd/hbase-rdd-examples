@@ -35,5 +35,5 @@ object WriteMultiCf extends App {
 
       k -> content
     })
-    .tohbase("test-table")
+    .toHBase("test-table")
 }
