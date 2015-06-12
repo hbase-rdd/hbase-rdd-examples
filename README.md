@@ -12,7 +12,7 @@ First, build the project with
 
     sbt assembly
 
-This will generate `target/scala-2.10/hbase-rdd-examples-assembly-0.4.3.jar`.
+This will generate `target/scala-2.10/hbase-rdd-examples-assembly-0.5.1.jar`.
 
 You can then copy this file, together with the files in the `scripts` directory, on a gateway machine of the cluster, and then run the scripts to launch the jobs. Of course, you may have to adapt some parameters in the scripts.
 
