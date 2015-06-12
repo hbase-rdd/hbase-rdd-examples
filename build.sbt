@@ -2,7 +2,7 @@ import AssemblyKeys._
 
 name := "hbase-rdd-examples"
 
-version := "0.5.0"
+version := "0.5.1"
 
 scalaVersion := "2.10.4"
 
@@ -27,5 +27,5 @@ libraryDependencies ++= Seq(
   "org.apache.hbase" % "hbase-common" % "0.98.6-cdh5.3.1" % "provided",
   "org.apache.hbase" % "hbase-client" % "0.98.6-cdh5.3.1" % "provided",
   "org.apache.hbase" % "hbase-server" % "0.98.6-cdh5.3.1" % "provided",
-  "eu.unicredit" %% "hbase-rdd" % "0.5.0"
+  "eu.unicredit" %% "hbase-rdd" % "0.5.1"
 )
