@@ -1,4 +1,4 @@
-PRG=hbase-rdd-examples
+PRG=hbase-rdd-examples-assembly
 VER=0.7.0
 
 . /etc/spark/conf/spark-env.sh
