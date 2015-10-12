@@ -2,7 +2,7 @@ import AssemblyKeys._
 
 name := "hbase-rdd-examples"
 
-version := "0.5.3.1"
+version := "0.6.0"
 
 scalaVersion := "2.10.4"
 
