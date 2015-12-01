@@ -3,7 +3,7 @@ HBase RDD examples
 
 ![logo](https://raw.githubusercontent.com/unicredit/hbase-rdd/master/docs/logo.png)
 
-This is an example project for [HBase RDD](https://github.com/unicredit/hbase-rdd). It currently runs on CDH 5.3, although it will run on other versions of CDH with minor modifications.
+This is an example project for [HBase RDD](https://github.com/unicredit/hbase-rdd). It currently runs on CDH 5.5, although it will run on other versions of CDH with minor modifications.
 
 Running
 -------
