@@ -85,6 +85,7 @@ object WriteTsvToHFiles extends App {
 
   val c = Config.parse(args.toList, Config())
   implicit lazy val hbaseconfig = HBaseConfig(c)
+  val admin = Admin()
 
   val sparkConf = new SparkConf().setAppName(mainClass)
   val sc = new SparkContext(sparkConf)
@@ -95,13 +96,14 @@ object WriteTsvToHFiles extends App {
       (fields.head, fields.tail)
     }
 
-  if (tableExists(c.table, c.cfamily))
-    snapshot(c.table)
+  if (admin.tableExists(c.table, c.cfamily))
+    admin.snapshot(c.table)
   else{
     val keysRdd = input.map { case (k, _) => k }
     val splits = getSplits(keysRdd, c.input_path, c.region_size)
-    createTable(c.table, c.cfamily, splits)
+    admin.createTable(c.table, c.cfamily, splits)
   }
+  admin.close
 
   input.toHBaseBulk(c.table, c.cfamily, c.headers.tail)
 

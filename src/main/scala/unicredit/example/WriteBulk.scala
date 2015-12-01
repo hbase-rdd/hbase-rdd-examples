@@ -23,11 +23,12 @@ object WriteBulk extends App {
   lazy val sparkConf = new SparkConf().setAppName(name)
   lazy val sc = new SparkContext(sparkConf)
   implicit val config = HBaseConfig() // Assumes hbase-site.xml is on classpath
+  val admin = Admin()
   val table = "test-table"
   val file = "test-input"
   val families = Set("cf1", "cf2")
 
-  if (tableExists(table, families)) {
+  if (admin.tableExists(table, families)) {
     sc.textFile(file)
       .map({ line =>
         val Array(k, col1, col2, col3) = line split "\t"
@@ -39,4 +40,5 @@ object WriteBulk extends App {
       })
       .toHBaseBulk(table)
   }
+  admin.close
 }
