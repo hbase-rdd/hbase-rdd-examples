@@ -1,14 +1,10 @@
-import AssemblyKeys._
-
 name := "hbase-rdd-examples"
 
-version := "0.8.0"
+version := "0.9.0"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8")
+crossScalaVersions := Seq("2.11.12", "2.12.8")
 
-assemblySettings
-
-assemblyOption in assembly ~= { _.copy(includeScala = false) }
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -21,8 +17,8 @@ resolvers ++= Seq(
   "Cloudera releases" at "https://repository.cloudera.com/artifactory/libs-release"
 )
 
-val sparkVersion = "1.5.0"
-val hbaseVersion = "1.0.0-cdh5.5.2"
+val sparkVersion = "2.4.3"
+val hbaseVersion = "2.1.0-cdh6.2.0"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion % "provided",
